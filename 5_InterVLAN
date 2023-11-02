@@ -1,0 +1,39 @@
+/* Option 1: Router-on-a-stick */
+interface {interface-id.vlan-id}		// do for each subinterface (for each VLAN)
++ description {string}
++ encapsulation dot1q {vlan-id}
++ ip address {ip-address} {ip-mask}
++ ipv6 address {ipv6-address/prefix}
++ exit
+
+interface {interface-id}			// do for wrapper interface
++ descrpition {string}
++ no shutdown
++ exit
+
+/* Option 2: Layer-3 Switch */
+interface vlan {vlan-id}			// do for each interface (for each VLAN)
++ description {string}
++ ip address {ip-address} {ip-mask}
++ ipv6 address {ipv6-address/prefix}
++ no shutdown
++ exit
+
+interface {interface-name}			// do for each interface to a router
++ description {string}
++ no switchport
++ ip address {ip-address} {ip-mask}
++ no shutdown
++ exit
+
+// After configuring interfaces we need to allow routing
+// We should add all networks to an OSPF area
+ip routing
+ip ospf 10
++ network {network-address} {network-wildcard} area 0
++ ...
++ exit
+
+/* Analysis */
+show ip route | begin Gateway
+

@@ -1,0 +1,20 @@
+/* Configure neighbor networks in all routers */
+router ospf 10
++ router-id {router-id}
++ network {network-address} {network-wildcard} area 0	// for each connected network
++ ...
++ passive-interface {interface-name} 			// for each connected Ethernet LANs
++ ...
+
+/* Assign OSPF to interfaces*/
+interface {interface-name}
++ ip ospf area 0
++ ip ospf network point-to-point			// Only for router-to-router links
++ ip ospf priority {priority-number}			// Prioritize election of DR/BDR
+
+/* Clear after re-configuring */
+clear ip ospf process
+
+/* Analysis */
+show ip protocols
+

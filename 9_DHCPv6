@@ -1,0 +1,41 @@
+/* DHCPv6 Server configuration */
+ipv6 unicast-routing
+
+// Create pools
+ipv6 dhcp pool {pool-name}
++ ipv6 address prefix {network-address/prefix}
++ dns-server {ipv6-address}
++ domain-name {url}
++ default-router {ipv6-address}			// Usually not configured
++ netbios-name-server {ipv6-address}		// Usually not configured
++ lease {days hours minutes | infinite}		// Usually not configured
+
+// Setup pools at interfaces
+interface {interface-id}
++ description {string}
++ ipv6 address {ipv6-address}
++ ipv6 address {link-local-address} link-local
++ ipv6 nd other-config-flag			// Stateless
++ ipv6 nd managed-config-flag			// Stateful
++ ipv6 nd prefix default no-autoconfig		// Stateful
++ ipv6 dhcp server {pool-name}
++ no shutdown
++ end
+
+/* DHCPv6 Relay configuration */
+interface {interface-id}
++ ipv6 dhcp relay destination {ipv6-address/prefix}
+
+/* DHCPv6 Client configuration */
+ipv6 unicast-routing
+
+interface {interface-id}
++ ipv6 enable
++ ipv6 address autoconfig			// Stateless
++ ipv6 address dhcp				// Stateful
++ no shutdown
++ end
+
+/* Analysis */
+show ipv6 dhcp pool
+show ipv6 dhcp binding

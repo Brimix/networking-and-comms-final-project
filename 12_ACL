@@ -1,0 +1,24 @@
+/* Configured numbered ACLs by line */
+access-list {number} {tcp | udp | icmp |} {deny | permit | remark} {ip-address} {ip-wildcard}
+
+/* Configured named ACLs by entering scope */
+ip access-list {standard | extended} {name}
++ remark {acl-name}
++ {permit | deny} {_ | tcp | udp | icmp} host {ip-address}
++ ...
++ {permit | deny} {_ | tcp | udp | icmp} {network-address} {network-wildcard}
++ ...
+
+// To modify by entry
+ip access-list {standard | extended} {name}
++ no {entry-number}
++ {entry-number} {permit | deny} {_ | tcp | udp | icmp} {ip-address} {ip-wildcard}
+
+/* Set ACL on interfaces */
+interface {interface-id}
++ ip access-group {acl-number | acl-name} {in | out}
+
+/* Analysis */
+show access-lists
+show running-config | section access-list
+clear access-list counters {ACL-name}

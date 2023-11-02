@@ -1,0 +1,46 @@
+/* All comands are run inside configure-terminal  */
+
+/* Configure Layer 1 communication for each interface */
+interface {interface-id}
++ duplex {type}
++ speed {number}
++ mdix auto
+
+/* Configure basic network devices */
+enable secret {privileged-exec-password}
+banner motd # {banner-message} #
+
+ip domain-name {url}				// Only if requested by statement
+no ip domain-lookup
+
+ip default-gateway {gateway-ip-address}		// Only for remote management of Layer 2 device
+ipv6 default-gateway {gateway-ipv6-address}	// Only for remote management of Layer 2 device
+ipv6 unicast-routing				// Only for IPV6 routing of Layer 3 device
+
+/* Configure line access to device */
+line console 0
++ logging synchronous
++ password {console-password}
++ exec-timeout {minutes}
++ login
++ exit
+
+line vty 0 15
++ password {vty-password}
++ login		 				// Use login local for username authentication
++ transport input {ssh | telnet}
++ exit
+
+service password-encryption
+
+/* Configure SVI for management */
+interface vlan 1 				// Change id in case you have an management VLAN
++ ip address {ip-address} {ip-mask}
++ exit
+
+/** Remember to shutdown all unused ports **/
+
+/* Analysis */
+ping {ip-address | ipv6-address}
+show running-config | section line
+

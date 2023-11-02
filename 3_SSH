@@ -1,0 +1,15 @@
+/* Configure SSH on device */
+ip domain-name {url}
+ip ssh version 2
+crypto key generate rsa 			// Will ask for modulus
+
+username {string} password {string}
+
+/* Ensure virtual lines access requires SSH */
+line vty 0 15
++ transport input ssh
++ login local
++ end
+
+/** To test this feature try to access from a host**/
+

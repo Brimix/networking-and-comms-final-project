@@ -1,0 +1,22 @@
+/* Configure static IPv4 routes */
+ip route {ip-address} {ip-mask} {next-hop-ip-address} {distance}		// Standard
+ip route {ip-address} {ip-mask} {exit-int} {distance}				// Only for p2p serial interfaces
+ip route {ip-address} {ip-mask} {exit-int} {next-hop-ip-address} {distance} 	// When IP is required but interface is wanted
+
+ip route 0.0.0.0 0.0.0.0 {next-hop-ip-address}					// Default route
+
+/* Configure static IPv6 routes */
+ipv6 unicast-routing
+ipv6 route {ipv6-address/prefix} {next-hop-ipv6-address} {distance}		// Standard
+ipv6 route {ipv6-address/prefix} {exit-int} {distance}				// Only for p2p serial interfaces
+ipv6 route {ipv6-address/prefix} {exit-int} {next-hop-ipv6-address} {distance}	// When IPv6 is required but interface is wanted, or when using a link-local address
+
+ipv6 route ::/0 {next-hop-ip-address}						// Default route
+
+/* Analysis */
+show {ip | ipv6} route {ip-address | ipv6-address}
+show {ip | ipv6} route static
+show {ip | ipv6} route | begin Gateway
+
+show running-config | section {ip | ipv6} route
+

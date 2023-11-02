@@ -1,0 +1,24 @@
+/* Configure an EtherChannel */
+interface range {interface-range-ids}
++ shutdown
++ channel-group {channel-id} mode on
++ no shutdown
++ exit
+
+// Now the channel works as an interface, you can apply regular configuration...
+// Note: It's usually a trunk channel
+interface port-channel {channel-id}
++ ... 
+
+/* Spanning-Tree root setup */
+spanning-tree vlan {vlan-id} root primary	// We wan this to be the Root
+spanning-tree vlan {vlan-id} root secondary	// We wan this to be the Backup Root
+spanning-tree vlan {vlan-id} priority {number}	// Alternative to assign roots
+
+/* Analysis */
+show etherchannel summary
+show etherchannel port-channel
+show interfaces | include Ethernet
+
+show spanning-tree vlan {vlan-id}
+

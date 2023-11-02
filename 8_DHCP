@@ -1,0 +1,50 @@
+/* DHCP Server configuration */
+// Exclude known ip addresses
+ip dhcp excluded-address {low-ip-address} {high-ip-address}
+...
+
+// Create pools
+ip dhcp pool {pool-name}
++ network {network-address} {network-mask}
++ dns-server {ip-address}
++ domain-name {url}
++ default-router {ip-address}			// Usually not configured
++ netbios-name-server {ip-address}		// Usually not configured
++ lease {days hours minutes | infinite}		// Usually not configured
+
+// Reset (usually not needed)
+no service dhcp
+service dhcp
+
+/* DHCP Relay configuration */
+interface {interface-id}
++ ip helper-address {ip-address}
+
+/* DHCP Client configuration */
+interface {interface-id}
++ ip address dhcp
++ no shutdown
+
+// In hosts we should renew ip
+ipconfig /renew
+
+/* DHCP Snooping | ARP Inspection */
+// On network devices:
+ip dhcp snooping
+ip dhcp snooping vlan {vlan-id}
+ip arp inspection vlan {vlan-id}
+
+// On private (trusted) interfaces. Trunk links and trusted devices.
+interface {interface-name}
++ ip dhcp snooping trust
++ ip arp inspection trust
+
+// On public interfaces
+interface {interface-name} 
++ ip dhcp snooping limit rate {number-per-second}
++ ip arp inspection validate {src-mac &| dst-mac &| ip}
+
+/* Analysis */
+show running-config | section dhcp
+show ip dhcp binding
+show ip dhcp snooping binding

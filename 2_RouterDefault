@@ -1,0 +1,16 @@
+/* Configure IP and IPV6 on interfaces*/
+interface {interface-name}
++ description {message}
++ ip address {ip-address} {ip-mask}
++ ipv6 address {ipv6-address/prefix}
++ ipv6 address {link-local-address/prefix} link-local
++ no shutdown
++ exit
+
+/* Analysis */
+show running-config | secion {section}
+show ip interface brief
+show ip route
+show interface {interface-name}
+ping {ip-address | ipv6-address}
+

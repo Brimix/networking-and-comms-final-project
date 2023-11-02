@@ -1,0 +1,10 @@
+// On each alternative gateway
+interface {interface-name}
++ ip address {ip-address}
++ standby version 2
++ standby {hs-number} ip {hs-ip-address}
++ standby {hs-number} priority {number}		// higher value means higher priority
++ standby {hs-number} preempt			// use on desired active router
+
+// Analysis
+show standby brief
