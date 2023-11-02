@@ -1,0 +1,31 @@
+/* CDP - LLDP */
+// Enable globally
+{| no} cdp run
+{| no} lldp run
+
+// Enable by interface
+interface {interface-id}
+{| no} cdp enable
+{| no} lldp transmit
+{| no} lldp receive
+
+/* Time - NTP */
+// Manually configure (command is run in privileged-exec)
+clock set {hh:mm:ss} {mmmm dd yyyy}
+
+// Receive from NTP server
+ntp server {ip-address}
+
+/* SNMP */
+
+/* Syslog */
+// Allow timestamps
+service timestamps log datetime
+
+
+/* Analysis */
+show cdp {| neighbors | interface}
+show lldp {| neighbors}
+
+show clock detail
+show ntp {associations | status}

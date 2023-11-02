@@ -1,0 +1,30 @@
+/* Define NAT mappings */
+// Static NAT
+ip nat inside source static {local-address} {global-address}	// do for each mapped static route
+...
+
+// Dynamic NAT
+ip access-list standard {acl-name}
++ permit {network-address} {network-wildcard} 						// local ip addresses
+
+ip nat pool {pool-name} {low-ip-address} {high-ip-address} netmask {network-mask}	// global ip address
+ip nat inside source list {acl-name} pool {pool-name}
+
+// PAT
+ip nat inside source list {acl-name} pool {pool-name} overload				// Option 1
+ip nat inside source list {acl-name} interface {interface-id} overload			// Option 2
+
+
+/* Apply NAT in interfaces*/
+interface {interface-id}
++ ip nat {inside | outside}
+
+/* Reset */
+clear ip nat translation
+
+/* Analysis */
+show running-config | include nat
+show running-config | include pool
+show ip nat translations
+show ip nat translation verbose
+
