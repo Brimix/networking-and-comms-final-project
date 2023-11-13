@@ -1,0 +1,18 @@
+/* DHCP Snooping | ARP Inspection */
+// On network devices:
+ip dhcp snooping
+ip dhcp snooping vlan {vlan-id}
+ip arp inspection vlan {vlan-id}
+
+// On private (trusted) interfaces. Trunk links and trusted devices.
+interface {interface-name}
++ ip dhcp snooping trust
++ ip arp inspection trust
+
+// On public interfaces
+interface {interface-name} 
++ ip dhcp snooping limit rate {number-per-second}
++ ip arp inspection validate {src-mac &| dst-mac &| ip}
+
+/* Analysis */
+show ip dhcp snooping binding
