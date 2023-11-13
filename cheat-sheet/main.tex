@@ -1,0 +1,86 @@
+\documentclass{article}
+\usepackage{pdflscape}
+\usepackage{listings}
+\usepackage{fancyvrb}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{amsmath}
+\usepackage{geometry}
+
+\geometry{a4paper, top=1cm, left=1cm, right=1cm, bottom=1cm}
+
+\lstset{basicstyle=\small\ttfamily, breaklines=true, frame=single}
+
+\begin{document}
+\begin{landscape}
+
+\title{Networking essentials}
+\author{Brimix}
+
+%\maketitle
+
+\section{Device Basics}
+\lstinputlisting{01_DeviceBasics.txt}
+\clearpage
+
+\section{Routing within a LAN}
+\lstinputlisting{02_RoutingLAN}
+%\clearpage
+
+\section{Configure SSH}
+\lstinputlisting{03_SSH}
+\clearpage
+
+\section{Configure VLANs}
+\lstinputlisting{04_VLAN}
+\clearpage
+
+\section{Allow InterVLAN routing}
+\lstinputlisting{05_InterVLAN}
+\clearpage
+
+\section{EtherChannel and STP}
+\lstinputlisting{06_EtherChannel&STP}
+%\clearpage
+
+\section{Hot Standby Routing Protocol}
+\lstinputlisting{07_HSRP}
+\clearpage
+
+\section{DHCP for IPV4}
+\lstinputlisting{08_DHCP}
+\clearpage
+
+\section{DHCP Snooping}
+\lstinputlisting{08_DHCP-Snooping}
+\clearpage
+
+\section{DHCP for IPV6}
+\lstinputlisting{09_DHCPv6}
+\clearpage
+
+\section{Static Routing}
+\lstinputlisting{10_Routing}
+%\clearpage
+
+\section{OSPF short path routing}
+\lstinputlisting{11_OSPF}
+\clearpage
+
+\section{Acces Lists}
+\lstinputlisting{12_ACL}
+\clearpage
+
+\section{NAT configuration}
+\lstinputlisting{13_NAT}
+\clearpage
+
+\section{Network management setups}
+\lstinputlisting{14_Management}
+\clearpage
+
+% Add more sections for additional files if needed
+
+\end{landscape}
+\end{document}
+
