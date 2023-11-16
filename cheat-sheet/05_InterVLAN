@@ -29,7 +29,7 @@ interface {interface-name}			// do for each interface to a router
 // After configuring interfaces we need to allow routing
 // We should add all networks to an OSPF area
 ip routing
-ip ospf 10
+router ospf 10
 + network {network-address} {network-wildcard} area 0
 + ...
 + exit
