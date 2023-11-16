@@ -1,0 +1,217 @@
+!
+version 12.2(37)SE1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname MLS2
+!
+!
+!
+!
+!
+!
+ip routing
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree vlan 1,20,30,40,50,60,70,80,90 priority 28672
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/1
+ switchport trunk allowed vlan 1,20,30,40
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface FastEthernet0/2
+ switchport trunk allowed vlan 1,50,80,90
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface FastEthernet0/3
+ switchport trunk allowed vlan 1,40,60,70
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface FastEthernet0/4
+ switchport trunk allowed vlan 1,20,30,40,50,60,70,80,90
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface FastEthernet0/5
+!
+interface FastEthernet0/6
+!
+interface FastEthernet0/7
+!
+interface FastEthernet0/8
+!
+interface FastEthernet0/9
+!
+interface FastEthernet0/10
+!
+interface FastEthernet0/11
+!
+interface FastEthernet0/12
+!
+interface FastEthernet0/13
+!
+interface FastEthernet0/14
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+!
+interface FastEthernet0/21
+!
+interface FastEthernet0/22
+!
+interface FastEthernet0/23
+!
+interface FastEthernet0/24
+!
+interface GigabitEthernet0/1
+ no switchport
+ ip address 172.16.4.2 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2
+ no switchport
+ ip address 172.16.3.2 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan20
+ description Vlan 20 alternate gateway
+ mac-address 0060.2fa9.5801
+ ip address 10.20.1.3 255.255.255.0
+ standby version 2
+ standby 0 ip 10.20.1.1
+ standby 0 priority 50
+!
+interface Vlan30
+ description Vlan 30 alternate gateway
+ mac-address 0060.2fa9.5802
+ ip address 10.30.1.3 255.255.255.0
+ standby version 2
+ standby 0 ip 10.30.1.1
+ standby 0 priority 50
+!
+interface Vlan40
+ description Vlan 40 alternate gateway
+ mac-address 0060.2fa9.5803
+ ip address 10.40.1.3 255.255.255.0
+ standby version 2
+ standby 0 ip 10.40.1.1
+ standby 0 priority 50
+!
+interface Vlan50
+ description Vlan 50 alternate gateway
+ mac-address 0060.2fa9.5804
+ ip address 10.50.1.3 255.255.255.0
+ standby version 2
+ standby 0 ip 10.50.1.1
+ standby 0 priority 50
+!
+interface Vlan60
+ description Vlan 60 alternate gateway
+ mac-address 0060.2fa9.5805
+ ip address 10.60.1.3 255.255.255.0
+ standby version 2
+ standby 0 ip 10.60.1.1
+ standby 0 priority 50
+!
+interface Vlan70
+ description Vlan 70 alternate gateway
+ mac-address 0060.2fa9.5806
+ ip address 10.70.1.3 255.255.255.0
+ standby version 2
+ standby 0 ip 10.70.1.1
+ standby 0 priority 50
+!
+interface Vlan80
+ description Vlan 80 alternate gateway
+ mac-address 0060.2fa9.5807
+ ip address 10.80.1.3 255.255.255.0
+ standby version 2
+ standby 0 ip 10.80.1.1
+ standby 0 priority 50
+!
+interface Vlan90
+ description Vlan 90 alternate gateway
+ mac-address 0060.2fa9.5808
+ ip address 10.90.1.3 255.255.255.0
+ standby version 2
+ standby 0 ip 10.90.1.1
+ standby 0 priority 50
+!
+router ospf 10
+ router-id 4.4.4.4
+ log-adjacency-changes
+ network 172.16.3.0 0.0.0.3 area 0
+ network 172.16.4.0 0.0.0.3 area 0
+ network 10.20.1.0 0.0.0.255 area 0
+ network 10.30.1.0 0.0.0.255 area 0
+ network 10.40.1.0 0.0.0.255 area 0
+ network 10.50.1.0 0.0.0.255 area 0
+ network 10.60.1.0 0.0.0.255 area 0
+ network 10.70.1.0 0.0.0.255 area 0
+ network 10.80.1.0 0.0.0.255 area 0
+ network 10.90.1.0 0.0.0.255 area 0
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+!
+end
+
