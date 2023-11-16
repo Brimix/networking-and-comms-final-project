@@ -5,12 +5,16 @@ router ospf 10
 + ...
 + passive-interface {interface-name} 			// for each connected Ethernet LANs
 + ...
++ auto-cost reference-bandwidth {Mbps}			// Adjust cost reference for metric
 
 /* Assign OSPF to interfaces*/
 interface {interface-name}
 + ip ospf area 0
 + ip ospf network point-to-point			// Only for router-to-router links
 + ip ospf priority {priority-number}			// Prioritize election of DR/BDR
++ ip ospf cost						// [HACK] Manually set the cost
++ ip ospf hello-interval {seconds}			// Should be synced in all neighbors
++ ip ospf dead-interval {seconds}			// Should be synced in all neighbors
 
 /* Clear after re-configuring */
 clear ip ospf process
